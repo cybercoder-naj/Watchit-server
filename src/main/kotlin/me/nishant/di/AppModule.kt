@@ -2,6 +2,10 @@ package me.nishant.di
 
 import me.nishant.data.user.MongoUserDataSource
 import me.nishant.data.user.UserDataSource
+import me.nishant.security.hashing.HashingService
+import me.nishant.security.hashing.SHA256HashingService
+import me.nishant.security.token.JwtTokenService
+import me.nishant.security.token.TokenService
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.coroutine.coroutine
 import org.litote.kmongo.reactivestreams.KMongo
@@ -26,5 +30,13 @@ object AppModule {
 
     fun userDataSource(db: CoroutineDatabase): UserDataSource {
         return MongoUserDataSource(db)
+    }
+
+    fun tokenService(): TokenService {
+        return JwtTokenService()
+    }
+
+    fun hashingService(): HashingService {
+        return SHA256HashingService()
     }
 }
